@@ -19,24 +19,16 @@ public class FileReader {
                 if ((char)ch=='\n'){
                     newStr[son++] = str;
                     str = "";
+                    ch = fileInputStream.read();
                     continue;
                 }
-                if ((char)ch==' ')
+                if ((char)ch==' '){
+                    ch = fileInputStream.read();
                     continue;
+            
+                }
                 str += (char)ch;
                 ch = fileInputStream.read();
-                for (int i=0; i<4; i++){
-                    String[] arrOfStr = str.split(":", 2);
-                    if (arrOfStr[0] == "Name")
-                        name = arrOfStr[1];
-                    if (arrOfStr[0] == "Age")
-                        age = Integer.parseInt(arrOfStr[1]);
-                    if (arrOfStr[0] == "Email")
-                        email = arrOfStr[1];
-                    if (arrOfStr[0] == "Phone")
-                        phone = Long.parseLong(arrOfStr[1]);
-                    
-                }
             }
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
@@ -44,7 +36,17 @@ public class FileReader {
         } catch (IOException e) {
             System.out.println("I/O error");
         }
-        
+        for (int i=0; i<4; i++){
+            String[] arrOfStr = str.split(":", 2);
+            if (arrOfStr[0] == "Name")
+                name = arrOfStr[1];
+            if (arrOfStr[0] == "Age")
+                age = Integer.parseInt(arrOfStr[1]);
+            if (arrOfStr[0] == "Email")
+                email = arrOfStr[1];
+            if (arrOfStr[0] == "Phone")
+                phone = Long.parseLong(arrOfStr[1]);
+        }
         return new Profile(name,age,email,phone);
     }
 }

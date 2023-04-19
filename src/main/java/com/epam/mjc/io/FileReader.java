@@ -8,9 +8,12 @@ import java.io.IOException;
 public class FileReader {
 
     public Profile getDataFromFile(File file) {
-            String str = "", name="",email="";
+            String str = "";
+            String name="";
+            String email="";
             String[] newStr =  new String[4];
-            int son = 0, age=0;
+            int son = 0;
+            int age=0;
             long phone=0;
         try(FileInputStream fileInputStream = new FileInputStream(file.getAbsolutePath())) {
             int ch = fileInputStream.read();
@@ -38,13 +41,13 @@ public class FileReader {
         }
         for (int i=0; i<4; i++){
             String[] arrOfStr = str.split(":", 2);
-            if (arrOfStr[0] == "Name")
+            if (arrOfStr[0]!= null && arrOfStr[0].equals("Name") )
                 name = arrOfStr[1];
-            if (arrOfStr[0] == "Age")
+            if (arrOfStr[0]!= null && arrOfStr[0].equals("Age"))
                 age = Integer.parseInt(arrOfStr[1]);
-            if (arrOfStr[0] == "Email")
+            if (arrOfStr[0]!= null && arrOfStr[0].equals("Email"))
                 email = arrOfStr[1];
-            if (arrOfStr[0] == "Phone")
+            if (arrOfStr[0]!= null && arrOfStr[0].equals("Phone"))
                 phone = Long.parseLong(arrOfStr[1]);
         }
         return new Profile(name,age,email,phone);

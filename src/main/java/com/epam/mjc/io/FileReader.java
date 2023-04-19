@@ -14,15 +14,15 @@ public class FileReader {
         int son = 0;
         int age;
         long phone;
-        try (BufferedReader br = new BufferedReader(
-                new InputStreamReader(new FileInputStream(file.getAbsoluteFile())))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file.getAbsoluteFile())))) {
             String line = br.readLine();
             while (line != null) {
                 newStr[son++] = line;
                 line = br.readLine();
             }
+
         } catch (IOException e) {
-            System.out.println("I/O Exception");
+            e.getStackTrace();
         }
         String[] arrOfStr = newStr[0].split(":");
         arrOfStr[1] = arrOfStr[1].trim();
